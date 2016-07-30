@@ -1,17 +1,8 @@
-/*
-This will better manage Wifi connection and
-automatically power cycle the Wifi module and perform reconnection attempts.
-*/
 
 SYSTEM_MODE(SEMI_AUTOMATIC);
 
-
-// The STARTUP call is placed outside of any other function
-// What goes inside is any valid code that can be executed. Here, we use a function call.
-// Using a single function is preferable to having several `STARTUP()` calls.
 STARTUP(setPinsToInput());
 STARTUP(WiFi.selectAntenna(ANT_AUTO));
-
 
 #define but_clean D1
 #define bump_left D3
@@ -34,7 +25,6 @@ int led_red_volt = 1000;
 int led_green_volt = 1000;
 String robState = "idle";
 int idleCounter = 0;
-
 
 uint8_t retry_count = 0;
 unsigned long old_time = millis();
@@ -193,5 +183,6 @@ void checkIdleStatus() {
         Particle.process();
         delay(1000);
         System.sleep(led_green,CHANGE);
+        idleCounter = 0;
     }
 }
