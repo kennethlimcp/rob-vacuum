@@ -23,7 +23,9 @@ int led_red_min = 1000;
 int led_green_min = 1000;
 int led_red_volt = 1000;
 int led_green_volt = 1000;
-String robState = "idle";
+String robOldState = "idle";
+String robNewState = "idle";
+int sameStateCounter = 1;
 int idleCounter = 0;
 
 uint8_t retry_count = 0;
@@ -142,23 +144,23 @@ void checkState(void){
     if(millis() - check_time > 3000){
         if(led_red_max < 2000 && led_red_min != 1000) {
             if(led_green_max < 2000){
-                robState = "idle";
+                robNewState = "idle";
                 checkIdleStatus();
             }
             else if (led_green_max > 2000 && led_green_min == 1000 && voltDock < 1200)
-                robState = "vacuuming";
+                robNewState = "vacuuming";
              else if (led_green_max > 2000 && led_green_min == 1000 && voltDock > 1200)
-                robState = "charged";
+                robNewState = "charged";
             else if (led_green_max > 2000 && led_green_min != 1000)
-                robState = "active";
+                robNewState = "active";
         }
         else if (led_red_max > 2000){
             if(led_green_max < 2000 && led_green_min != 1000)
-                robState = "error";
+                robNewState = "error";
             else if (led_green_max > 2000 && led_green_min == 1000)
-                robState = "homing";
+                robNewState = "homing";
             else if (led_green_max > 2000 && led_green_min != 1000)
-                robState = "charging";
+                robNewState = "charging";
         }
 
     led_red_max = 1000;
@@ -168,8 +170,19 @@ void checkState(void){
     led_red_volt = 1000;
     led_green_volt = 1000;
 
-    Particle.publish("rob/volt",String(voltBatt) + "," + String(voltDock));
-    Particle.publish("rob/status/state",robState + "," + WiFi.RSSI());
+    if(robNewState == robOldState) {
+        if(sameStateCounter >= 5) {
+            sameStateCounter = 1;
+        }
+        else
+            sameStateCounter++;
+    }
+
+    if (robNewState != robOldState || sameStateCounter >= 5) {
+        Particle.publish("rob/status/state",robNewState + "," + WiFi.RSSI());
+        Particle.publish("rob/volt",String(voltBatt) + "," + String(voltDock));
+    }
+    robOldState = robNewState;
     check_time = millis();
     }
 }
