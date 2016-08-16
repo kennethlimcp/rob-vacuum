@@ -1,7 +1,7 @@
-#### Hacking a Ecovacs C250 vacuum cleaner
+## Hacking a Ecovacs C250 vacuum cleaner
 
 
-##### Robot brain specs
+#### Robot brain specs
 
 - Microcontroller: STM32F030RBT6
 - Motor driver: Allegro A4950
@@ -10,11 +10,11 @@
 
 There are more Mosfets sitting around but i will not list them all out.
 
-##### Background
+#### Background
 
 This robotic vacuum cleaner was taken over from my uncle after it was deemed unsuitable for their use. The aim was to fix it and have it roam around my house, eating dirt along the way! :)
 
-##### Resources
+#### Resources
 
 You can find more stuff in this repo:
 
@@ -23,7 +23,7 @@ You can find more stuff in this repo:
 - [Firmware](Firmware)
 - [Photos](Photos)
 
-##### To do
+#### To do
 
 - [ ] find out the IR protocol
 - [ ] increase the battery capacity
@@ -32,9 +32,9 @@ You can find more stuff in this repo:
 
 ---
 
-#### Hacking log
+## Hacking log
 
-##### First fix attempt (03 July 2016)
+#### First fix attempt (03 July 2016)
 
 The initial described symptom was: "unable to charge" and my guess was that the battery had depleted. I took out the battery, stripped out the wrapper and revealed the innards of the battery.
 
@@ -42,7 +42,7 @@ It turns out that they are using 3 x Samsung 18650 batteries in series and there
 
 Everything seems ok and the robot was able to power up, vacuum, BUT still unable to charge when docked.
 
-##### Second fix attempt (05 July 2016)
+#### Second fix attempt (05 July 2016)
 
 Thinking that something weird must be going on, I took a look at the manual and went `aha!` Why is the required charging adapter `19V, 0.6A` while the one in the box is `12V, 1A`?
 
@@ -50,7 +50,7 @@ There must have been some mix up of the adapter during movement of the robot and
 
 Woohooo! Free robotic vacuum cleaner! XD
 
-##### First reverse engineering (23 July 2016)
+#### First reverse engineering (23 July 2016)
 
 With the robot proven to be functional, the next step was to [IoT-rize]() it. That's like a fancy word for, `EVERYTHING SHALL BE INTERNET CONNECTED`.
 
@@ -105,7 +105,7 @@ With all these information laid out, a schematic was drawn up and wired manually
 
 You can see that `rob` was able to publish various information about itself to the world.
 
-##### Third fix - slanted movement (31 July 2016)
+#### Third fix - slanted movement (31 July 2016)
 
 Recently, Rob (yes his new name) started to drift left as vacuuming is carried out. Initial post-mortem is "heated motor" which is a tell tale sign for possible jamming.
 
