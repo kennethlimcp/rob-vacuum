@@ -117,6 +117,8 @@ With no proper fix unless the motor is replaced, i swapped the left and right mo
 
 With a handy (retired) [IR receiver](https://www.sparkfun.com/products/retired/8554) and [IRRemote](https://github.com/babean/IRRemote) library ported to the [Particle](https://particle.io) platform, I managed to decipher the IR codes!
 
+![IR-setup](Photos/20160919_IRdecoding.jpg)
+
 ```text
 Type: 1 NEC
 No of bytes: 32
