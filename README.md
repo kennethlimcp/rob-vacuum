@@ -8,7 +8,7 @@
 - Omamp: LM224
 - Battery protection: SII S-8254A
 
-There are more Mosfets sitting around but i will not list them all out.
+There are more MOSFETS sitting around but i will not list them all out.
 
 #### Background
 
@@ -25,7 +25,7 @@ You can find more stuff in this repo:
 
 #### To do
 
-- [ ] find out the IR protocol
+- [x] find out the IR protocol
 - [ ] increase the battery capacity
 - [ ] remotely control modes
 - [ ] website
@@ -112,3 +112,27 @@ Recently, Rob (yes his new name) started to drift left as vacuuming is carried o
 ![motor](Photos/Repair 31Jul16/IMG_20160801_200746.jpg)
 
 With no proper fix unless the motor is replaced, i swapped the left and right motor to balance out the differences. Yes, we sometimes do that in robotics.
+
+#### IRdecoding (19 Sept 2016)
+
+With a handy (retired) [IR receiver](https://www.sparkfun.com/products/retired/8554) and [IRRemote](https://github.com/babean/IRRemote) library ported to the [Particle](https://particle.io) platform, I managed to decipher the IR codes!
+
+```text
+Type: 1 NEC
+No of bytes: 32
+
+IRCode  | function
+------------------
+2aa22dd | clean
+2aa33cc | turn left
+2aa44bb | turn right
+2aa55aa | move up
+2aa6699 | move down
+2aa8877 | go home
+2aa7788 | spiral mode
+2aa9966 | edge mode
+25557a8 | set clock
+25557a8 | set planned time
+```
+
+It's rather straightforward with a handy library and you can see the code here: [IRdecoding](Firmware/IRdecoding)

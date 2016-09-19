@@ -140,7 +140,6 @@ void checkState(void){
 
     checkVolt();
 
-
     if(millis() - check_time > 3000){
         if(led_red_max < 2000 && led_red_min != 1000) {
             if(led_green_max < 2000){
