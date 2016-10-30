@@ -138,3 +138,12 @@ IRCode  | function
 ```
 
 It's rather straightforward with a handy library and you can see the code here: [IRdecoding](Firmware/IRdecoding)
+
+
+#### IR control (07 Oct 2016)
+
+![IR led](Photos/071016_irLED.jpg)
+
+With the addition an IR led pointing to the IR receiver at the back, we are now able to have full, remote control capabilities of rob! The control is exposed in a `Particle.function()` and sending a command such as `up` will translate into a IR signal sent.
+
+You can see the implementation here: https://github.com/kennethlimcp/rob-vacuum/blob/master/Firmware/main/rob-monitor.ino#L228
