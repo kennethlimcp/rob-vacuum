@@ -81,24 +81,24 @@ void setPinsToInput()
 }
 
 void manageWiFi(){
-    if(millis() - old_time >= 2000){
-        if(retry_count < 10){
-            if(!WiFi.ready()){
-                WiFi.connect();
-                retry_count++;
-            }
-            else if (!Particle.connected()){
-                Particle.connect();
-                retry_count++;
-            }
-        }
-        else{
-            WiFi.off();
-            retry_count = 0;
-            WiFi.on();
-        }
-        old_time = millis();
-    }
+	if(millis() - old_time >= 2000){
+	 if(retry_count < 10){
+	  if(!WiFi.ready()){
+	   WiFi.connect();
+	   retry_count++;
+	  }
+	  else if (!Particle.connected()){
+	   Particle.connect();
+	   retry_count++;
+	  }
+	 }
+	 else{
+	     WiFi.off();
+	     retry_count = 0;
+	     WiFi.on();
+	 }
+	 old_time = millis();
+	}
 }
 
 void butCleanInt() {
@@ -163,7 +163,6 @@ void checkState(void){
 
 	checkVolt();
 
-
 	if(millis() - check_time > 3000) {
   if(led_red_max < 2000 && led_red_min != 1000) {
    if(led_green_max < 2000){
@@ -227,16 +226,16 @@ void checkIdleStatus() {
 
 void checkIRstatus() {
 	if(IRcommand != 0) {
-			if(IRcommand == "clean") sendHexNEC(0x2aa22dd, NEC_BIT_COUNT, 0, 38);
-			else if (IRcommand == "home") sendHexNEC(0x2aa8877, NEC_BIT_COUNT, 0, 38);
-			else if (IRcommand == "left") sendHexNEC(0x2aa33cc, NEC_BIT_COUNT, 0, 38);
-			else if (IRcommand == "right") sendHexNEC(0x2aa44bb, NEC_BIT_COUNT, 0, 38);
-  	else if (IRcommand == "up") sendHexNEC(0x2aa55aa, NEC_BIT_COUNT, 0, 38);
-			else if (IRcommand == "down") sendHexNEC(0x2aa6699, NEC_BIT_COUNT, 0, 38);
-			else if (IRcommand == "spiral") sendHexNEC(0x2aa7788, NEC_BIT_COUNT, 0, 38);
-			else if (IRcommand == "edge") sendHexNEC(0x2aa7766, NEC_BIT_COUNT, 0, 38);
+		if(IRcommand == "clean") sendHexNEC(0x2aa22dd, NEC_BIT_COUNT, 0, 38);
+		else if (IRcommand == "home") sendHexNEC(0x2aa8877, NEC_BIT_COUNT, 0, 38);
+		else if (IRcommand == "left") sendHexNEC(0x2aa33cc, NEC_BIT_COUNT, 0, 38);
+		else if (IRcommand == "right") sendHexNEC(0x2aa44bb, NEC_BIT_COUNT, 0, 38);
+ 	else if (IRcommand == "up") sendHexNEC(0x2aa55aa, NEC_BIT_COUNT, 0, 38);
+		else if (IRcommand == "down") sendHexNEC(0x2aa6699, NEC_BIT_COUNT, 0, 38);
+		else if (IRcommand == "spiral") sendHexNEC(0x2aa7788, NEC_BIT_COUNT, 0, 38);
+		else if (IRcommand == "edge") sendHexNEC(0x2aa7766, NEC_BIT_COUNT, 0, 38);
 
-			Particle.publish("rob/state/ir",IRcommand);
-			IRcommand = "";
-		}
+		Particle.publish("rob/state/ir",IRcommand);
+		IRcommand = "";
+	}
 }
